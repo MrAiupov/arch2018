@@ -21,7 +21,7 @@ echo 'Установка аудиодрайверов'
 pacman -S alsa-lib alsa-utils lib32-alsa-plugins lib32-curl bluez bluedevil pulseaudio-alsa pulseaudio-bluetooth bluez-utils plasma-nm --noconfirm
 
 echo 'Установить рабочий стол Plasma'
-sudo pacman -S plasma-desktop plasma-pa konsole powerdevil kscreen khotkeys kinfocenter plasma-thunderbolt plasma-vault plasma-workspace-wallpapers xdg-desktop-portal xdg-desktop-portal-kde --noconfirm
+pacman -S plasma-desktop plasma-pa konsole powerdevil kscreen khotkeys kinfocenter plasma-thunderbolt plasma-vault plasma-workspace-wallpapers xdg-desktop-portal xdg-desktop-portal-kde --noconfirm
 
 systemctl enable bluetooth.service
 
@@ -37,11 +37,15 @@ pacman -S steam lutris --noconfirm
 echo 'Ставим дополнительные программы'
 pacman -S os-prober grub-customizer chromium firefox firefox-i18n-ru opera opera-ffmpeg-codecs vlc elisa gimp krita kdenlive libreoffice libreoffice-fresh-ru obs-studio audacity qbittorrent inkscape handbrake --noconfirm
 
-echo 'Добавление репозитория Heracera'
+echo 'Добавление репозитория Herecura'
 echo "[herecura]" >> /etc/pacman.conf
 echo "Server = https://repo.herecura.be/$repo/$arch" >> /etc/pacman.conf
 pacman -Syu --noconfirm
 pacman -S google-chrome vivaldi vivaldi-ffmpeg-codecs --noconfirm
+
+echo 'Чистка кэша от всех обновлений и установочных файлов'
+pacman -Sc --noconfirm
+pacman -Scc --noconfirm
 
 echo 'Установка завершена! Перезагрузите систему.'
 exit

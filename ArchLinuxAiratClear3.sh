@@ -18,22 +18,30 @@ echo 'Драйвера видеодрайверов Nvidea'
 pacman -S nvidia vulkan-tools vulkan-icd-loader lib32-nvidia-utils lib32-vulkan-icd-loader --noconfirm
 
 echo 'Установка аудиодрайверов'
-pacman -S alsa-lib alsa-utils lib32-alsa-plugins lib32-curl --noconfirm
+pacman -S alsa-lib alsa-utils lib32-alsa-plugins lib32-curl bluez bluedevil pulseaudio-alsa pulseaudio-bluetooth bluez-utils plasma-nm --noconfirm
 
 echo 'Установить рабочий стол Plasma'
 sudo pacman -S plasma-desktop plasma-pa konsole powerdevil kscreen khotkeys kinfocenter plasma-thunderbolt plasma-vault plasma-workspace-wallpapers xdg-desktop-portal xdg-desktop-portal-kde --noconfirm
 
+systemctl enable bluetooth.service
+
 echo 'Установка нужных программ'
-pacman -S dolphin ark kate spectacle kcalc okular gnome-disk-utility gparted gwenview kde-gtk-config kwallet-pam screenfetch chromium --noconfirm
+pacman -S dolphin ark kate flameshot kcalc okular gnome-disk-utility gparted gwenview kde-gtk-config kwallet-pam neofetch --noconfirm
 
 echo 'Установка Wine'
-pacman -S wine wine-gecko wine-mono multilib-devel --noconfirm
+pacman -S wine wine-gecko wine-mono wine-nine vkd3d multilib-devel winetricks lib32-vkd3d --noconfirm
 
 echo 'Установка Steam и Litris'
 pacman -S steam lutris --noconfirm
 
 echo 'Ставим дополнительные программы'
-pacman -S firefox firefox-i18n-ru opera opera-ffmpeg-codecs vlc elisa gimp krita kdenlive libreoffice libreoffice-fresh-ru obs-studio audacity qbittorrent inkscape handbrake --noconfirm
+pacman -S os-prober grub-customizer chromium firefox firefox-i18n-ru opera opera-ffmpeg-codecs vlc elisa gimp krita kdenlive libreoffice libreoffice-fresh-ru obs-studio audacity qbittorrent inkscape handbrake --noconfirm
+
+echo 'Добавление репозитория Heracera'
+echo "[herecura]" >> /etc/pacman.conf
+echo "Server = https://repo.herecura.be/$repo/$arch" >> /etc/pacman.conf
+pacman -Syu --noconfirm
+pacman -S google-chrome vivaldi vivaldi-ffmpeg-codecs --noconfirm
 
 echo 'Установка завершена! Перезагрузите систему.'
 exit
